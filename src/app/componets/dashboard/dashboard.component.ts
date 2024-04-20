@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,10 +10,16 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  public users: any = [];
+  constructor(private authService: AuthService, private api: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    
+    this.api.getUsers().
+      subscribe( res => {
+        this.users = res;
+      }
+      
+      )
   }
 
   logout(){
