@@ -11,17 +11,6 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getUsers(){
-    return this.http.get<any>(this.baseURL+"users").pipe(
-      catchError((err:any) =>{
-        if(err instanceof HttpErrorResponse){
-          if(err.status === 401){
-            return this.handleUnauthorizedError(request,next);
-          }
-        }
-
-        return throwError(()=> new Error('Some other error occured'));
-        
-      })
-    );
+    return this.http.get<any>(this.baseURL);
   }
 }
